@@ -1,0 +1,12 @@
+[package]
+name = "nucleo_nvim"
+version = "0.0.1"
+edition = "2021"
+
+[lib]
+path = "lua/nucleo/rust/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+mlua = { version = "0.10.2", features = ["module", "luajit"] }
+nucleo-matcher = "0.3.1"
