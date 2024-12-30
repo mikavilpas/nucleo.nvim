@@ -22,6 +22,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.2
 
+      - name: Set up external applications
+        run: |
+          # fd is a dependency of telescope
+          # https://github.com/sharkdp/fd?tab=readme-ov-file#on-ubuntu
+          # make sure it's available as `fd` - there seems to be some conflict in Ubuntu
+          sudo apt-get install fd-find
+          sudo ln -s $(which fdfind) /usr/local/bin/fd
+          fd --version
+
       - name: Setup Rust toolchain
         run: rustup toolchain install nightly --profile minimal
 
