@@ -1,4 +1,10 @@
+import { flavors } from "@catppuccin/palette"
+import { rgbify } from "@tui-sandbox/library/dist/src/client/color-utilities"
 import type { MyTestDirectoryFile } from "MyTestDirectory"
+
+const colors = {
+  highlightedMatch: rgbify(flavors.macchiato.colors.surface0.rgb),
+}
 
 describe("usage of pattern Atoms", () => {
   it("supports fuzzy_match (AtomKind::Atom)", () => {
@@ -188,7 +194,13 @@ describe("usage of pattern Atoms", () => {
         cy.contains(showfile)
         cy.contains(hidefile)
         cy.typeIntoTerminal(`^${showfile}$`)
-        cy.contains(showfile)
+
+        cy.get("span")
+          .filter((_, el) => el.textContent?.includes(showfile) ?? false)
+          .last()
+          .invoke("css", "background-color")
+          .should("eq", colors.highlightedMatch)
+
         cy.contains(hidefile).should("not.exist")
       })
     })
