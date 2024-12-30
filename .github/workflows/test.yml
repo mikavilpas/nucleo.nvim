@@ -6,53 +6,44 @@ on:
     branches:
       - main
 
+env:
+  SCCACHE_GHA_ENABLED: true
+  RUSTC_WRAPPER: sccache
+  CARGO_TERM_COLOR: always
+
 jobs:
   build:
     name: Run tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        neovim_version: ["nightly", "stable"]
+        neovim_version: ["nightly"]
 
     steps:
       - uses: actions/checkout@v4.2.2
-      - name: Set up dependencies
-        run: |
-          # ripgrep is a dependency of telescope and fzf-lua
-          sudo apt-get install ripgrep
-          rg --version
 
-          # fd is a dependency of telescope and fzf-lua
+      - name: Set up external applications
+        run: |
+          # fd is a dependency of telescope
           # https://github.com/sharkdp/fd?tab=readme-ov-file#on-ubuntu
           # make sure it's available as `fd` - there seems to be some conflict in Ubuntu
           sudo apt-get install fd-find
           sudo ln -s $(which fdfind) /usr/local/bin/fd
           fd --version
 
-          # install fzf
-          sudo apt install fzf
-          fzf --version
+      - name: Setup Rust toolchain
+        run: rustup toolchain install nightly --profile minimal
 
-          # realpath is used to resolve relative paths in yazi.nvim
-          which realpath || {
-            # just fail with an error message if realpath is not found
-            echo "realpath is not installed, but it should be part of GNU coreutils and included in Ubuntu"
-            exit 1
-          }
+      - name: Setup sccache
+        uses: mozilla-actions/sccache-action@v0.0.7
 
-      # TODO setup nucleo rust project for ci
-      - name: Compile and install yazi from source
-        uses: baptiste0928/cargo-install@v3.1.1
-        with:
-          # yazi-cli is the `ya` command line interface
-          crate: yazi-cli
-          git: https://github.com/sxyazi/yazi
-          tag: v0.4.2
-          # commit:
-          #   # https://github.com/sxyazi/yazi/commit/d72f90356b98
-          #   d72f90356b98
+      - name: Build rust code with cargo
+        run: cargo build --verbose --release
 
-      - name: Run tests
+      - name: Test rust code with cargo test
+        run: cargo test --all --verbose
+
+      - name: Test lua code with nvim-busted-action
         uses: nvim-neorocks/nvim-busted-action@v1.1.0
         with:
           nvim_version: ${{ matrix.neovim_version }}
@@ -65,22 +56,20 @@ jobs:
           cache: "pnpm"
       - run: pnpm install
 
-      - name: Preinstall neovim plugins
+      - name: Preinstall neovim plugins fo integration-tests
         run: pnpm tui neovim exec "Lazy! sync"
         working-directory: integration-tests
 
       # need to work around https://github.com/cypress-io/github-action/issues/1246
       - run: pnpm --filter integration-tests exec cypress install
 
-      - name: Cypress test
+      - name: Run integration-tests with cypress
         uses: cypress-io/github-action@v6
         with:
           install: false
           command: pnpm cy:run
 
       - uses: actions/upload-artifact@v4.5.0
-        # add the line below to store screenshots only on failures
-        # if: failure()
         if: failure()
         with:
           name: cypress-screenshots
