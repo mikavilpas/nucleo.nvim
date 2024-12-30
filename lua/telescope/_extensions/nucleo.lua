@@ -9,12 +9,12 @@ local make_sorter = function()
     -- score is used to show the lines in the correct order (best matches first
     -- so the user quickly finds what they want). A lower score seems to be
     -- considered a better match in telescope.
-    ---@param self Sorter
+    ---@param _self Sorter
     ---@param needle string # the current prompt - the text the user wants to filter the results by
     ---@param haystack string # the text for the current line, e.g. `mydir/file_1.txt`
     ---@return number # a score for the line, higher is better
     ---@diagnostic disable-next-line: unused-local
-    scoring_function = function(self, needle, haystack)
+    scoring_function = function(_self, needle, haystack)
       -- https://github.com/nvim-telescope/telescope.nvim?tab=readme-ov-file#sorters
       local result = rust_nucleo.score(needle, haystack)
 
@@ -32,11 +32,11 @@ local make_sorter = function()
     -- matched the search. This is used to highlight the matching parts of the
     -- line, so that the user can intuitively see how the matching algorithm is
     -- working, and maybe make adjustments to better match the desired results.
-    ---@param self Sorter
+    ---@param _self Sorter
     ---@param needle string # the current prompt - the text the user wants to filter the results by
     ---@param haystack string # the text for the current line, e.g. `mydir/file_1.txt`
     ---@diagnostic disable-next-line: unused-local
-    highlighter = function(self, needle, haystack)
+    highlighter = function(_self, needle, haystack)
       local result = rust_nucleo.score(needle, haystack)
       local indices = result.indices
 

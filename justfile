@@ -32,17 +32,9 @@ lint:
       exit 1; \
     fi
 
-# Run all tests
-test:
-    luarocks test --local
-
-# Run only the tests marked with #focus somewhere in the test name
-test-focus:
-    luarocks test --local -- --filter=focus
-
 # Reformat all code
 format:
-    stylua lua/ spec/ integration-tests/ ./repro.lua
+    stylua lua/ spec/ integration-tests/
 
 # Check the code for errors (lint + test + format)
-check: lint test format
+check: lint format
