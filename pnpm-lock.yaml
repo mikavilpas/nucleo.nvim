@@ -12,8 +12,8 @@ importers:
         specifier: 0.3.13
         version: 0.3.13(typescript@5.7.2)
       markdownlint-cli2:
-        specifier: 0.17.0
-        version: 0.17.0
+        specifier: 0.17.1
+        version: 0.17.1
       prettier:
         specifier: 3.4.2
         version: 3.4.2
@@ -52,8 +52,8 @@ importers:
         specifier: 8.19.0
         version: 8.19.0(eslint@9.17.0)(typescript@5.7.2)
       concurrently:
-        specifier: 9.1.1
-        version: 9.1.1
+        specifier: 9.1.2
+        version: 9.1.2
       eslint:
         specifier: 9.17.0
         version: 9.17.0
@@ -781,8 +781,8 @@ packages:
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
-  concurrently@9.1.1:
-    resolution: {integrity: sha512-6VX8lrBIycgZKTwBsWS+bLrmkGRkDmvtGsYylRN9b93CygN6CbK46HmnQ3rdSOR8HRjdahDrxb5MqD9cEFOg5Q==}
+  concurrently@9.1.2:
+    resolution: {integrity: sha512-H9MWcoPsYddwbOGM6difjVwVZHl63nwMEwDJG/L7VGtuaJhb12h2caPG2tVPWs7emuYix252iGfqOyrz1GczTQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -1567,13 +1567,13 @@ packages:
     peerDependencies:
       markdownlint-cli2: '>=0.0.4'
 
-  markdownlint-cli2@0.17.0:
-    resolution: {integrity: sha512-8Xz7wkkkV4wJTf+pvryU3J/fT3BZWD3ZykcjYBR0GuH0GHvrCbswaCdurbuUuAPDGFZy4cxBGYCJSAOW8jM4aQ==}
+  markdownlint-cli2@0.17.1:
+    resolution: {integrity: sha512-n1Im9lhKJJE12/u2N0GWBwPqeb0HGdylN8XpSFg9hbj35+QalY9Vi6mxwUQdG6wlSrrIq9ZDQ0Q85AQG9V2WOg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  markdownlint@0.37.2:
-    resolution: {integrity: sha512-m8QhYnRA1ptbhIjhVVBUkKQcUelVxuyO/yXyLewnc1+xs4eXhST/+hIy29goO+EYVLmWtknH4SmYQ4s0caoKqw==}
+  markdownlint@0.37.3:
+    resolution: {integrity: sha512-eoQqH0291YCCjd+Pe1PUQ9AmWthlVmS0XWgcionkZ8q34ceZyRI+pYvsWksXJJL8OBkWCPwp1h/pnXxrPFC4oA==}
     engines: {node: '>=18'}
 
   mdast-util-find-and-replace@3.0.1:
@@ -1680,9 +1680,6 @@ packages:
 
   micromark-util-chunked@2.0.1:
     resolution: {integrity: sha512-QUNFEOPELfmvv+4xiNg2sRYeS/P84pTW0TCgP5zc9FpXetHY0ab7SxKyAQCNCc1eK0459uoLI1y5oO5Vc1dbhA==}
-
-  micromark-util-classify-character@2.0.0:
-    resolution: {integrity: sha512-S0ze2R9GH+fu41FA7pbSqNWObo/kzwf8rN/+IGlW/4tC6oACOs8B++bh+i9bVyNnwCcuksbFwsBme5OCKXCwIw==}
 
   micromark-util-classify-character@2.0.1:
     resolution: {integrity: sha512-K0kHzM6afW/MbeWYWLjoHQv1sgg2Q9EccHEDzSkxiP/EaagNzCm7T/WMKZ3rjMbvIpvBiZgwR3dKMygtA4mG1Q==}
@@ -3192,7 +3189,7 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  concurrently@9.1.1:
+  concurrently@9.1.2:
     dependencies:
       chalk: 4.1.2
       lodash: 4.17.21
@@ -4040,25 +4037,26 @@ snapshots:
 
   markdown-table@3.0.3: {}
 
-  markdownlint-cli2-formatter-default@0.0.5(markdownlint-cli2@0.17.0):
+  markdownlint-cli2-formatter-default@0.0.5(markdownlint-cli2@0.17.1):
     dependencies:
-      markdownlint-cli2: 0.17.0
+      markdownlint-cli2: 0.17.1
 
-  markdownlint-cli2@0.17.0:
+  markdownlint-cli2@0.17.1:
     dependencies:
       globby: 14.0.2
       js-yaml: 4.1.0
       jsonc-parser: 3.3.1
-      markdownlint: 0.37.2
-      markdownlint-cli2-formatter-default: 0.0.5(markdownlint-cli2@0.17.0)
+      markdownlint: 0.37.3
+      markdownlint-cli2-formatter-default: 0.0.5(markdownlint-cli2@0.17.1)
       micromatch: 4.0.8
     transitivePeerDependencies:
       - supports-color
 
-  markdownlint@0.37.2:
+  markdownlint@0.37.3:
     dependencies:
       markdown-it: 14.1.0
       micromark: 4.0.1
+      micromark-core-commonmark: 2.0.2
       micromark-extension-directive: 3.0.2
       micromark-extension-gfm-autolink-literal: 2.1.0
       micromark-extension-gfm-footnote: 2.1.0
@@ -4232,7 +4230,7 @@ snapshots:
     dependencies:
       devlop: 1.1.0
       micromark-util-chunked: 2.0.1
-      micromark-util-classify-character: 2.0.0
+      micromark-util-classify-character: 2.0.1
       micromark-util-resolve-all: 2.0.1
       micromark-util-symbol: 2.0.1
       micromark-util-types: 2.0.1
@@ -4318,12 +4316,6 @@ snapshots:
   micromark-util-chunked@2.0.1:
     dependencies:
       micromark-util-symbol: 2.0.1
-
-  micromark-util-classify-character@2.0.0:
-    dependencies:
-      micromark-util-character: 2.1.1
-      micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.1
 
   micromark-util-classify-character@2.0.1:
     dependencies:
